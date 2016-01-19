@@ -14,10 +14,20 @@ describe DockingStation do
     end
   end
 
+  describe '#dock' do
   it 'docks something' do
     bike = Bike.new
     expect(subject.dock(bike)).to eq bike
   end
+
+  it 'raises an error when a bike is already docked' do
+    bike = Bike.new
+    if subject.bike
+      expect {subject.dock(bike)}.to raise_error 'a bike is already docked'
+    end
+  end
+
+end
 
   it 'returns docked bikes' do
     bike = Bike.new
