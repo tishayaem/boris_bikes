@@ -12,5 +12,5 @@ class DockingStation
     fail 'Docking station full' if @bike
     @bike = bike
   end
-
+#dbdjfndf
 end
