@@ -11,10 +11,10 @@ let(:bike) {double :bike}
 
  it 'releases a bike' do
 
-   subject.dock double(:bike, broken?: false)
-    bike = subject.release_bike
-    expect(bike).to be_working
-  
+allow(bike).to receive(:working?).and_return(true)
+subject.dock(bike)
+released_bike = subject.release_bike
+expect(released_bike).to be_working
     end
   end
 
