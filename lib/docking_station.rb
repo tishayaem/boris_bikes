@@ -9,15 +9,21 @@ class DockingStation
   end
 
   DEFAULT_CAPACITY = 20
-  
+
   def set_capacity(capacity = DEFAULT_CAPACITY)
   	capacity
   end
 
   def release_bike
     raise "There are no bikes here!" if empty?
-    @bikes.pop
-  end
+        # "This bike is broken, please try another one"
+      for i in 0...@bikes.length
+        if not @bikes[i].broken
+          return @bikes.delete_at(i)
+        end
+      end
+      raise "There is no bike available"
+    end
 
   def dock(bike)
     raise "No space to dock here." if full?
