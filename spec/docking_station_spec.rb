@@ -15,7 +15,7 @@ describe DockingStation do
   end
 
   it "doesn't dock a bike if over capacity" do
-     DockingStation::DEFAULT_CAPACITY.times{subject.dock(Bike.new)}
+     subject.set_capacity.times{subject.dock(Bike.new)}
      expect{subject.dock(Bike.new)}.to raise_error("No space to dock here.")
   end
 
@@ -32,5 +32,13 @@ describe DockingStation do
     test_bike = Bike.new
     subject.dock(test_bike)
     expect(subject.bikes.last).to eq test_bike
+  end
+
+  it 'sets a new capacity when provided a new value' do
+  	expect(subject.set_capacity(30)).to eq 30
+  end
+
+  it 'checks if default capacity is 20' do
+  	expect(subject.set_capacity).to eq 20
   end
 end
