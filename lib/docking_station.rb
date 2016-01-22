@@ -1,4 +1,5 @@
 require_relative 'bike'
+require_relative 'van'
 # require "pry"
 
 class DockingStation
@@ -6,12 +7,11 @@ class DockingStation
 
   def initialize
     @bikes = []
+    @broken_bikes = []
     @capacity = set_capacity
   end
 
-  DEFAULT_CAPACITY = 20
-
-  def set_capacity(capacity = DEFAULT_CAPACITY)
+  def set_capacity(capacity = 20)
   	capacity
   end
 
@@ -27,6 +27,10 @@ class DockingStation
     raise "No space to dock here." if full?
     @bikes << bike
   end
+
+  def remove_bikes
+  	@broken_bikes = bikes.select{|bike| bike.working? == false}
+  end 
 
   private
   def full?

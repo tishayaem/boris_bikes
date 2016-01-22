@@ -52,11 +52,11 @@ describe DockingStation do
   describe "Broken Bike" do
 
   	before(:example) do
-	  	allow(bike).to receive(:working?)
+	  	allow(bike).to receive(:working?).and_return(false)
 	  	allow(bike).to receive(:break).and_return(false)
 	    bike.break
 	  end
-	  
+
 	  it 'reports that a bike is broken' do
 	    expect(bike).to_not be_working
 	  end
@@ -65,5 +65,12 @@ describe DockingStation do
 	    subject.dock(bike)
 	    expect {subject.release_bike}.to raise_error("There is no working bike available.")
 	  end
+
+	  it 'removes broken bike' do
+			subject.dock(bike)
+			expect(subject.remove_bikes).to include(bike) 
+		end
 	end
+
+		it { is_expected.to respond_to :remove_bikes}
 end
