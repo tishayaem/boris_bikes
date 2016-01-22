@@ -1,4 +1,5 @@
 require_relative 'bike'
+require "pry"
 
 class DockingStation
   attr_reader :bikes
@@ -16,14 +17,11 @@ class DockingStation
 
   def release_bike
     raise "There are no bikes here!" if empty?
-        # "This bike is broken, please try another one"
-      for i in 0...@bikes.length
-        if not @bikes[i].broken
-          return @bikes.delete_at(i)
-        end
-      end
-      raise "There is no bike available"
-    end
+    working_bikes = bikes.select{|bike| bike.working?}
+    # binding.pry
+   	raise "There is no working bike available." if working_bikes.empty?
+  	return bikes.delete(working_bikes.pop)
+  end
 
   def dock(bike)
     raise "No space to dock here." if full?
