@@ -1,5 +1,5 @@
 require_relative 'bike'
-require "pry"
+# require "pry"
 
 class DockingStation
   attr_reader :bikes
@@ -20,7 +20,7 @@ class DockingStation
     working_bikes = bikes.select{|bike| bike.working?}
     # binding.pry
    	raise "There is no working bike available." if working_bikes.empty?
-  	return bikes.delete(working_bikes.pop)
+  	bikes.delete(working_bikes.pop)
   end
 
   def dock(bike)

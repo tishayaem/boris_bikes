@@ -4,7 +4,7 @@ describe DockingStation do
 
   it { is_expected.to respond_to :release_bike }
 
-  it 'returns a Bike' do
+  it 'release a bike' do
     test_bike = Bike.new
     subject.dock(test_bike)
     expect(subject.release_bike).to eq test_bike
@@ -52,6 +52,15 @@ describe DockingStation do
     bike.break
     subject.dock(bike)
     expect {subject.release_bike}.to raise_error("There is no working bike available.")
+  end
+
+  it 'release a working bike if broken bikes are present' do
+    test_bike = Bike.new
+    broken_bike = Bike.new
+    broken_bike.break
+    subject.dock(test_bike)
+    subject.dock(broken_bike)
+    expect(subject.release_bike).to eq test_bike
   end
 
 end
