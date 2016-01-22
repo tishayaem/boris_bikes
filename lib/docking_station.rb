@@ -1,9 +1,8 @@
 require_relative 'bike'
-require_relative 'van'
 # require "pry"
 
 class DockingStation
-  attr_reader :bikes
+  attr_accessor :bikes, :broken_bikes
 
   def initialize
     @bikes = []
@@ -28,9 +27,9 @@ class DockingStation
     @bikes << bike
   end
 
-  def remove_bikes
-  	@broken_bikes = bikes.select{|bike| bike.working? == false}
-  end 
+  def returns_broken_bikes
+ 		@bikes.select{|bike| !bike.working?}
+  end
 
   private
   def full?

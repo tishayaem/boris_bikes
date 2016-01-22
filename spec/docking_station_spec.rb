@@ -65,12 +65,5 @@ describe DockingStation do
 	    subject.dock(bike)
 	    expect {subject.release_bike}.to raise_error("There is no working bike available.")
 	  end
-
-	  it 'removes broken bike' do
-			subject.dock(bike)
-			expect(subject.remove_bikes).to include(bike) 
-		end
 	end
-
-		it { is_expected.to respond_to :remove_bikes}
 end
